@@ -6,6 +6,7 @@ import {HEROES} from "../mock-heroes";
 import {HeroDetailsComponent} from "../hero-details/hero-details.component";
 import {HeroService} from "../hero.service";
 import {Observable} from "rxjs";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-heroes',
@@ -15,7 +16,8 @@ import {Observable} from "rxjs";
     FormsModule,
     NgForOf,
     NgIf,
-    HeroDetailsComponent
+    HeroDetailsComponent,
+    RouterLink
   ],
   templateUrl: './heroes.component.html',
   styleUrl: './heroes.component.css'
@@ -24,11 +26,6 @@ export class HeroesComponent implements OnInit {
   constructor(private heroService: HeroService) {
   }
   heroes: Hero[] = [];
-  selectedHero?: Hero;
-
-  onSelect(hero: Hero) {
-    this.selectedHero = hero;
-  }
 
   getHeroes(): void {
     this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes);

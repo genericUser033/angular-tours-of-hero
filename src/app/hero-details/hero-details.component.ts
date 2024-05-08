@@ -1,7 +1,9 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormsModule} from "@angular/forms";
-import {NgIf, UpperCasePipe} from "@angular/common";
+import {NgIf, UpperCasePipe, Location} from "@angular/common";
 import {Hero} from "../hero";
+import {HeroService} from "../hero.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-hero-details',
@@ -14,6 +16,24 @@ import {Hero} from "../hero";
   templateUrl: './hero-details.component.html',
   styleUrl: './hero-details.component.css'
 })
-export class HeroDetailsComponent {
-  @Input() hero?: Hero;
+export class HeroDetailsComponent implements OnInit {
+  @Input() hero?: Hero | undefined;
+
+  constructor(private route: ActivatedRoute,
+              private heroService: HeroService,
+              private location: Location) {
+  }
+
+  getHeroFromId(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.heroService.getHeroById(id).subscribe(hero => this.hero = hero);
+  }
+
+  ngOnInit(): void {
+    this.getHeroFromId();
+  }
+
+  goBack() {
+    this.location.back();
+  }
 }
