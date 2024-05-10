@@ -3,6 +3,8 @@ import {NgModule} from "@angular/core";
 import {HeroesComponent} from "./heroes/heroes.component";
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {HeroDetailsComponent} from "./hero-details/hero-details.component";
+import {HttpClientInMemoryWebApiModule} from "angular-in-memory-web-api";
+import {InMemoryDataService} from "./in-memory-data.service";
 
 export const routes: Routes = [
   {path: 'heroes', component: HeroesComponent},
@@ -14,7 +16,10 @@ export const routes: Routes = [
 @NgModule({
   declarations: [],
   imports: [
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, { dataEncapsulation: false }
+    ),
   ],
   exports: [RouterModule]
 })
