@@ -2,10 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Hero} from "../hero";
 import {NgForOf, NgIf, UpperCasePipe} from "@angular/common";
 import {FormsModule} from "@angular/forms";
-import {HEROES} from "../mock-heroes";
 import {HeroDetailsComponent} from "../hero-details/hero-details.component";
 import {HeroService} from "../hero.service";
-import {Observable} from "rxjs";
 import {RouterLink} from "@angular/router";
 
 @Component({
@@ -33,5 +31,15 @@ export class HeroesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getHeroes();
+  }
+
+  add(name: string) {
+    name = name.trim();
+    if (!name) { return; }
+    this.heroService.addHero({name} as Hero).subscribe(name => this.heroes.push(name));
+  }
+
+  delete(hero: Hero) {
+    this.heroService.addHero(hero).subscribe();
   }
 }

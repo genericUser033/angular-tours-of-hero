@@ -15,6 +15,7 @@
 }
 
 .heroes a {
+  display: flex;
   color: #333;
   text-decoration: none;
   background-color: #EEE;
@@ -22,7 +23,7 @@
   padding: .3em 0;
   height: 1.6em;
   border-radius: 4px;
-  display: block;
+  /*display: block;*/
   width: 100%;
 }
 
@@ -51,4 +52,18 @@
   text-align: right;
   margin-right: .8em;
   border-radius: 4px 0 0 4px;
+}
+
+.hero-item {
+  display: flex; /* Use flexbox to align items in a row */
+  align-items: center;
+}
+
+.hero-item .delete {
+  margin-left: auto; /* Push the delete button to the right */
+}
+
+.delete button {
+  height: 5px;
+  width: 10px;
 }
